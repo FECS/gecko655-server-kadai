@@ -1,12 +1,14 @@
 #! /usr/bin/ruby -Ku
 
 
-class Server
+class String
   def sayHello()
 	print "Hello World\n"
   end
 
 end
 
-s = Server.new()
+s = "Hello"
 s.sayHello()
+
+
