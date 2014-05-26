@@ -34,5 +34,6 @@ build/
 .rvmrc
 
 
-.swp
+*.swp
+*~
 
