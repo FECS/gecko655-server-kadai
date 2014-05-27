@@ -1,4 +1,4 @@
-#! /usr/bin/ruby -Ku
+#! /usr/bin/env ruby -Ku
 
 s = "Hello"
 def s.sayHello()
