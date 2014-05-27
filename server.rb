@@ -1,4 +1,4 @@
-#! /usr/bin/ruby -Ku
+#! /usr/bin/env ruby -Ku
 
 
 class String
