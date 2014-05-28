@@ -3,6 +3,7 @@
 require 'net/http'
 require 'uri'
 require 'json'
+require 'date'
 
 
 class Server
@@ -36,13 +37,29 @@ class Server
       # Rubyはif, unlessの後置記法に対応しているので、一行実行はそっちの方がいい
       # 正規表現に使おう(文字列処理に強いんです)
     }
-  
+  end
+  def getTime()
+    day = {
+      "日曜日" =>0,
+      "月曜日" =>1,
+      "火曜日" =>2,
+      "水曜日" =>3,
+      "木曜日" =>4,
+      "金曜日" =>5,
+      "土曜日" =>6,
+    }
+    item = parse()
+    today = DateTime.now
+    fromNextEp = day[item["week"]] - today.wday
+    fromNextEp+=7 if (fromNextEp<0)
+    nextEp = today+fromNextEp
+    nextEp.strftime("%Y/%m/%d")+"/"+ item["time"]+":00"
   end
 
 end
 
 s = Server.new()
-puts s.parse()
+puts s.getTime()
 
 
 
