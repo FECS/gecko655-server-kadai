@@ -2,6 +2,7 @@
 
 require 'net/http'
 require 'uri'
+require 'json'
 
 
 class Server
@@ -17,9 +18,20 @@ class Server
   def getAnimate()
     Net::HTTP.get URI.parse('http://animemap.net/api/table/tokyo.json')
   end
+  def parse()
+    json = JSON.parse(getAnimate())
+    json["response"]["item"].each { |item|  
+      if item["title"] == "一週間フレンズ。"
+	return item
+      end
+    }
+  
+  end
 
 end
 
 s = Server.new()
-animateJson = s.getAnimate()
-puts animateJson
+puts s.parse()
+
+
+
