@@ -14,7 +14,12 @@ class Server
     puts contents
   end
 
+  def getAnimate()
+    Net::HTTP.get URI.parse('http://animemap.net/api/table/tokyo.json')
+  end
+
 end
 
 s = Server.new()
-s.showGoogle()
+animateJson = s.getAnimate()
+puts animateJson
