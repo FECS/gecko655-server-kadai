@@ -3,6 +3,7 @@
 require "net/http"
 require "uri"
 require "json"
+require "date"
 
 class Study
   def sayHello
@@ -45,13 +46,50 @@ class Study
       case item['title']
       when regex then
         puts item.inspect
-        break #ここはblock節ですよ
+        return item
+        # returnしないならbreakにしましょう
       end
     }
+  end
+
+  def get_wday wday_str
+    case wday_str
+    when /日曜日/ then
+      return 0
+    when /月曜日/ then
+      return 1
+    when /火曜日/ then
+      return 2
+    when /水曜日/ then
+      return 3
+    when /木曜日/ then
+      return 4
+    when /金曜日/ then
+      return 5
+    when /土曜日/ then
+      return 6
+    end
+
+    return 0
+  end
+
+  def show_next_broadcast anim_item
+    hms = anim_item['time']+":00"
+
+    now = DateTime.now
+    next_count = get_wday(anim_item['week']) - now.wday
+    next_count += 7 if next_count < 0
+    puts (now + next_count).strftime("%Y/%m/%d/")+hms
+  end
+
+  def show_next_broadcast_of regex=/一週間/
+    show_next_broadcast print_and_parse(regex)
   end
 end
 
 s = Study.new
-s.show_google
-s.get_anime_plan true
-s.print_and_parse
+# s.show_google
+# s.get_anime_plan true
+# s.print_and_parse
+
+s.show_next_broadcast_of
