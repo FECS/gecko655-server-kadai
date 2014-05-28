@@ -73,6 +73,8 @@ class Study
     return 0
   end
 
+  # 考え方はよろしいと思いました
+  # 強いて言うならDateTimeよりTimeがいいなあ・・・
   def show_next_broadcast anim_item
     hms = anim_item['time']+":00"
 
@@ -91,5 +93,10 @@ s = Study.new
 # s.show_google
 # s.get_anime_plan true
 # s.print_and_parse
-
 s.show_next_broadcast_of
+
+
+
+# 全体を通して、課題に特化しすぎているので本番はやらないように
+# キャメル式でもスネーク式でもまあいいかな
+# 省略出来る部分で分かりやすさに影響がないなら省略しましょう
